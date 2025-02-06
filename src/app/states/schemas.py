@@ -10,4 +10,6 @@ class AgentState(TypedDict):
     prompt: str
     context: list[Document]
     answer: str
+    social_media: str
+    clear_query: str
     on_topic: str

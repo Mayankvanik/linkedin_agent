@@ -2,7 +2,7 @@ import pytest
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage
 
-from app.states.scema import AgentState
+from app.states.schemas import AgentState
 
 
 @pytest.fixture
