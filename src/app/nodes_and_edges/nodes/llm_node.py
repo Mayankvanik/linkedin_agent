@@ -1,7 +1,7 @@
 from langchain_core.messages import AIMessage
 
 from app.logic.llm import create_llm
-from app.states.rag_state import AgentState
+from app.states.scema import AgentState
 
 
 async def llm_node(state: AgentState):
@@ -17,4 +17,6 @@ async def llm_node(state: AgentState):
 
     state["messages"].append(AIMessage(content=response.content))
     state["answer"] = response.content
+    print('➡ state["answer"]:', state["answer"])
+    
     return state

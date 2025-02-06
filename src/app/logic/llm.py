@@ -11,7 +11,7 @@ def get_weather(location: str):
         return "It's 32 degrees Celsius and sunny."
 
 
-def create_llm(model_name: str = "gpt-4o-mini") -> ChatOpenAI:
+def create_llm(model_name: str = "gpt-4o") -> ChatOpenAI:
     """
     Factory function to create and configure the LLM model with the provided tools.
 
