@@ -2,6 +2,7 @@ from langchain_core.messages import AIMessage
 
 from src.app.logic.llm import create_llm
 from src.app.states.schemas import AgentState
+import json,re
 
 
 async def llm_node(state: AgentState):
@@ -17,8 +18,23 @@ async def llm_node(state: AgentState):
 
     if "platform" in response.content:
         print('➡ response.content:', response.content)
-        state["social_media"] = response.content['answer'][0]['platform']
-        state['clear_query'] = response.content['answer'][0]['generated_query']
+        match = re.search(r'\[(.*?)\]', response.content)
+        if match:
+            # Extracted content between brackets
+            content = match.group(1)
+            
+            # Convert to list by replacing ':' with ',' and treating it as key-value pairs
+            content_list = [item for item in content.split(",")]
+            
+            print(content_list[0])
+        print('➡ response_data:', content_list[0])
+        #print('➡ response_data type:', type(response_data))
+        #print('➡ response_data:', response_data)
+
+        # Extract values correctly
+        state["social_media"] = content_list[0]
+        state["clear_query"] = content_list[1]
+
 
     state["messages"].append(AIMessage(content=response.content))
     state["answer"] = response.content
